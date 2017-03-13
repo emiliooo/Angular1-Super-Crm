@@ -26,8 +26,8 @@
                                             <label for="filter-sector" class="col-sm-3 col-xs-12 control-label required">Branża</label>
 
                                             <div class="col-sm-9 col-xs-12">
-                                                <select id="filter-sector" class="form-control" >
-                                                    <option value=" {{sector.id}}" ng-repeat="sector in sectors">{{ sector.name }} </option>
+                                                <select id="filter-sector" class="form-control" ng-model="filterBy.sector_id">
+                                                    <option  value="{{sector.id}}" ng-repeat="sector in sectors ">{{ sector.name }} </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -38,8 +38,8 @@
                                             <label for="filter-manager" class="col-sm-3 col-xs-12 control-label required">Opiekun klienta</label>
 
                                             <div class="col-sm-9 col-xs-12">
-                                                <select id="filter-manager" class="form-control">
-                                                    <option value="user.id" ng-repeat="user in users" > {{ user.name }}</option>
+                                                <select id="filter-manager" class="form-control" ng-model="filterBy.account_manager_id">
+                                                    <option value="{{ name.id }}" ng-repeat="name in names"> {{ name.name }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -99,7 +99,7 @@
                                     <td>{{user.company_name  }}</td>
                                     <td class="hidden-xs">{{ user.sector_name }}</td>
                                     <td class="hidden-xs">{{ user.account_manager_name }}</td>
-                                    <td class="text-center"><a href="#" class="label label-primary">Szczegóły</a></td>
+                                    <td class="text-center"><a href="/#/clients/{{client.id }}" class="label label-primary">Szczegóły</a></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -9,6 +9,10 @@
                  controller:'ClientsController',
                  templateUrl:'views/clients-list.html'
              })
+             .when('/clients/:clientId',{
+                 controller:'ClientDetailCtrl',
+                 templateUrl:'views/sectors-list.html'
+             })
              .when('/sectors',{
                  templateUrl:'views/sectors-list.html'
              })
@@ -27,12 +31,9 @@
 
     app.controller('ClientsController',['$scope','$http',function($scope,$http)
     {
-
         $scope.clients=[];
-
         $scope.orderBycolumn = 'id';
         $scope.orderByDir = false;
-
         $scope.filterBy ={};
 
         $http.get('data/clients.json').then(function(result){
@@ -43,10 +44,10 @@
             $scope.sectors = result.data;
         });
 
-        $http.get('http://localhost/api.php/users').then(function(result){
-            $scope.use = result.data;
-            
-            console.log( $scope.use)
+        $http.get('data/users.json').then(function(result){
+            $scope.names = result.data;
+
+
         });
 
         $scope.changeOrder = function(columnName){
@@ -63,6 +64,11 @@
 
     }])
 
+    app.controller('ClientDetailCtrl',['$scope',function($scope){
+
+
+
+      }])
 
 
 
