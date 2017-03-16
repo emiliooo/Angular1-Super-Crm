@@ -1,6 +1,6 @@
 (function(){
 
-     var app = angular.module('crmApp',['ngRoute']);
+     var app = angular.module('crmApp',['ngRoute','crmService']);
 
      app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider){
 
@@ -11,7 +11,7 @@
              })
              .when('/clients/:clientId',{
                  controller:'ClientDetailCtrl',
-                 templateUrl:'views/sectors-list.html'
+                 templateUrl:'views/client-details.html'
              })
              .when('/sectors',{
                  templateUrl:'views/sectors-list.html'
@@ -20,7 +20,7 @@
                  templateUrl:'views/users-list.html'
              })
              .otherwise({
-                redirectTo:'/clients'
+                redirectTo:'/index.html'
 
          });
 
@@ -60,15 +60,26 @@
 
             }
         }
+    }]);
+
+    app.controller('ClientDetailCtrl',['$scope','clients','$routeParams',function($scope,clients,$routeParams){
+
+            $scope.user = {};
 
 
-    }])
+            clients.getClient(
+                $routeParams.clientId,
+                function(data){
+                    $scope.user = data;
+                },
+                function (data,status) {
+                    console.log(data);
+                    console.log(status);
+                }
+            )
 
-    app.controller('ClientDetailCtrl',['$scope',function($scope){
 
-
-
-      }])
+        }])
 
 
 
