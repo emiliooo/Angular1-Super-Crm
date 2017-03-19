@@ -1,6 +1,6 @@
 (function(){
 
-     var app = angular.module('crmApp',['ngRoute','crmService']);
+     var app = angular.module('crmApp',['ngRoute']);
 
      app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider){
 
@@ -14,6 +14,7 @@
                  templateUrl:'views/client-details.html'
              })
              .when('/sectors',{
+                 controller:'SectorCtrl',
                  templateUrl:'views/sectors-list.html'
              })
              .when('/users',{
@@ -24,10 +25,16 @@
 
          });
 
-
          $locationProvider
              .html5Mode(true);
         }]);
+
+    app.controller('SectorCtrl',['$scope','$http',function($scope,$http) {
+        $http.get('data/sectors.json').then(function(res){
+            $scope.sect = res.data;
+            console.log($scope.sect)
+        });
+    }]);
 
     app.controller('ClientsController',['$scope','$http',function($scope,$http)
     {
@@ -71,6 +78,7 @@
                 $routeParams.clientId,
                 function(data){
                     $scope.user = data;
+                    console.log($scope.user)
                 },
                 function (data,status) {
                     console.log(data);
